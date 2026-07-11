@@ -18,9 +18,9 @@ public static class Arrays
 
         double[]  result = new double[count];
 
-        for (int i = 0; i <count; i  )
+        for (int i = 0; i <count; i ++)
         {
-            result[i] = start (i  1);
+            result[i] = start * (i + 1);
         }
         return result;
     }
