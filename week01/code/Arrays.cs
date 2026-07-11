@@ -1,3 +1,5 @@
+using System.Diagnostics.Metrics;
+
 public static class Arrays
 {
     /// <summary>
@@ -8,12 +10,19 @@ public static class Arrays
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     public static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Step 1: Crreate an array to store the results with sie = count
+        // Step 2: Loop from 0 to count - 1
+        // Step 3: For each position i, calculate the multiple as: start (i ; 1)
+        // Step 4: Store the results in an array
+        // Step 5: Return the array
 
-        return []; // replace this return statement with your own
+        double[]  result = new double[count];
+
+        for (int i = 0; i <count; i  )
+        {
+            result[i] = start (i  1);
+        }
+        return result;
     }
 
     /// <summary>
@@ -25,9 +34,20 @@ public static class Arrays
     /// </summary>
     public static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Step 1: Find the split point: data.Count - amount
+        int splitPoint = data.Count - amount;
+        
+        // Step 2: Take the last 'amount' elements
+        List<int> rightPart = data.GetRange(splitPoint, amount);
+       
+        // Step 3: Take the first part of the list (before split point)
+        List<int> leftPart = data.GetRange(0, splitPoint);
+       
+        // Step 4: Clear the original list
+        data.Clear();
+
+        // Step 5: Add the second part first, then the first part
+        data.AddRange(rightPart);
+        data.AddRange(leftPart);
     }
 }
