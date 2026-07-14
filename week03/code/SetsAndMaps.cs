@@ -46,16 +46,31 @@ public static class SetsAndMaps
 
     return pairs.ToArray();
 }
-    public static Dictionary<string, int> SummarizeDegrees(string filename)
-    {
-        var degrees = new Dictionary<string, int>();
-        foreach (var line in File.ReadLines(filename))
-        {
-            var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
-        }
+   public static Dictionary<string, int> SummarizeDegrees(string filename)
+{
+    var degrees = new Dictionary<string, int>();
 
-        return degrees;
+    foreach (var line in File.ReadLines(filename))
+    {
+        var fields = line.Split(",");
+
+        // The degree is in the 4th column (index 3)
+        string degree = fields[3];
+
+        // If the degree already exists, increase its count
+        if (degrees.ContainsKey(degree))
+        {
+            degrees[degree]++;
+        }
+        else
+        {
+            // Otherwise add it with a count of 1
+            degrees[degree] = 1;
+        }
+    }
+
+    return degrees;
+}
     }
 
     /// <summary>
@@ -75,25 +90,52 @@ public static class SetsAndMaps
     /// using the [] notation.
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
+{
+    // Remove spaces and convert both words to lowercase
+    word1 = word1.Replace(" ", "").ToLower();
+    word2 = word2.Replace(" ", "").ToLower();
+
+    // If the lengths are different, they can't be anagrams
+    if (word1.Length != word2.Length)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
         return false;
     }
 
-    /// <summary>
-    /// This function will read JSON (Javascript Object Notation) data from the 
-    /// United States Geological Service (USGS) consisting of earthquake data.
-    /// The data will include all earthquakes in the current day.
-    /// 
-    /// JSON data is organized into a dictionary. After reading the data using
-    /// the built-in HTTP client library, this function will return a list of all
-    /// earthquake locations ('place' attribute) and magnitudes ('mag' attribute).
-    /// Additional information about the format of the JSON data can be found 
-    /// at this website:  
-    /// 
-    /// https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
-    /// 
-    /// </summary>
+    // Dictionary to count letter occurrences
+    Dictionary<char, int> letters = new Dictionary<char, int>();
+
+    // Count each letter in the first word
+    foreach (char c in word1)
+    {
+        if (letters.ContainsKey(c))
+        {
+            letters[c]++;
+        }
+        else
+        {
+            letters[c] = 1;
+        }
+    }
+
+    // Subtract counts using the second word
+    foreach (char c in word2)
+    {
+        if (!letters.ContainsKey(c))
+        {
+            return false;
+        }
+
+        letters[c]--;
+
+        if (letters[c] == 0)
+        {
+            letters.Remove(c);
+        }
+    }
+
+    // If the dictionary is empty, the words are anagrams
+    return letters.Count == 0;
+}
     public static string[] EarthquakeDailySummary()
     {
         const string uri = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
