@@ -71,7 +71,6 @@ public static class SetsAndMaps
 
     return degrees;
 }
-    }
 
     /// <summary>
     /// Determine if 'word1' and 'word2' are anagrams.  An anagram
