@@ -20,22 +20,32 @@ public static class SetsAndMaps
     /// </summary>
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
+{
+    var seen = new HashSet<string>();
+    var pairs = new List<string>();
+
+    foreach (var word in words)
     {
-        // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        // Skip words with identical letters (example: "aa")
+        if (word[0] == word[1])
+            continue;
+
+        // Reverse the word
+        string reverse = $"{word[1]}{word[0]}";
+
+        // If we've already seen the reverse, we found a pair
+        if (seen.Contains(reverse))
+        {
+            pairs.Add($"{reverse} & {word}");
+        }
+        else
+        {
+            seen.Add(word);
+        }
     }
 
-    /// <summary>
-    /// Read a census file and summarize the degrees (education)
-    /// earned by those contained in the file.  The summary
-    /// should be stored in a dictionary where the key is the
-    /// degree earned and the value is the number of people that 
-    /// have earned that degree.  The degree information is in
-    /// the 4th column of the file.  There is no header row in the
-    /// file.
-    /// </summary>
-    /// <param name="filename">The name of the file to read</param>
-    /// <returns>fixed array of divisors</returns>
+    return pairs.ToArray();
+}
     public static Dictionary<string, int> SummarizeDegrees(string filename)
     {
         var degrees = new Dictionary<string, int>();
