@@ -9,21 +9,22 @@ public static class Arrays
     /// </summary>
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     public static double[] MultiplesOf(double number, int length)
+{
+    // Step 1: Create an array to store the results
+    // Step 2: Loop through each position in the array
+    // Step 3: Calculate the multiple
+    // Step 4: Store the multiple in the array
+    // Step 5: Return the completed array
+
+    double[] result = new double[length];
+
+    for (int i = 0; i < length; i++)
     {
-        // Step 1: Crreate an array to store the results with sie = count
-        // Step 2: Loop from 0 to count - 1
-        // Step 3: For each position i, calculate the multiple as: start (i ; 1)
-        // Step 4: Store the results in an array
-        // Step 5: Return the array
-
-        double[]  result = new double[count];
-
-        for (int i = 0; i <count; i ++)
-        {
-            result[i] = start * (i + 1);
-        }
-        return result;
+        result[i] = number * (i + 1);
     }
+
+    return result;
+}
 
     /// <summary>
     /// Rotate the 'data' to the right by the 'amount'.  For example, if the data is 
